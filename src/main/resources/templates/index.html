@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sourabh's Portfolio</title>
+    <link rel="stylesheet" th:href="@{/styles/css/style.css}" />
+    <link rel="stylesheet" th:href="@{/styles/css/mediaqueries.css}" />
+    <script th:src="@{./js/card.js}" defer></script>
+    <script th:src="@{./js/script.js}" defer></script>
+    <!-- Fontawesome Link for Icons -->
+    <link rel="stylesheet" th:href="@{https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css}">
+
+</head>
+<body>
+
+  <!---------- NAVBAR -------------->
+
+<nav id="desktop-nav">
+
+    <div class="navcontents">
+        <ul class="nav-links">
+            <li><a th:href="@{#about}">About</a></li>
+            <li><a th:href="@{#experience}">Skills</a></li>
+            <li><a th:href="@{#projects}">Projects</a></li>
+             <li><a th:href="@{#contact}">Contact Me</a></li> 
+        </ul>
+    </div>
+</nav>
+           <!-- FOR RESPONSIVE NAVBAR -->
+  <nav id="hamburger-nav">
+     <div class="logo"></div>
+     <div class="hamburger-menu">
+        <div class="hamburger-icon" th:onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="menu-links">
+            <li><a th:href="@{#about}" th:onclick="toggleMenu()">About</a></li>
+   <!--   <li><a th:href="@{#clients}" th:onclick="toggleMenu()">Clients</a></li>   -->  
+            <li><a th:href="@{#experience}" th:onclick="toggleMenu()">Experience</a></li>
+            <li><a th:href="@{#projects}" th:onclick="toggleMenu()">Projects</a></li>
+   <!--    <li><a th:href="@{#youtube}" th:onclick="toggleMenu()">@proofofconceptcode</a></li>     -->
+        </div>
+    </div>
+</nav>
+
+<!-- END OF NAVBAR -->
+
+<!-- *************************************************************************** -->
+
+   <!-- PROFILE SECTION -->
+   
+<section id="profile">
+    <div class="section__pic-container">
+        <img id="pimg"  th:src="@{${profilepic}}" th:alt="${myName}" />			
+    </div>
+    <div class="section__text">
+        <p class="section__text__p1">Hello, I'm</p>
+        <h1 class="title" th:text="${myName}"></h1>
+
+        <div class="animated-text">
+            <ul class="sec-texts">
+                <li th:each="title : ${titles}"><span class="animated" th:utext="${title}">Title</span></li>
+            </ul>
+        </div>
+
+
+        <div class="btn-container">
+            <a th:href="@{/download}">
+                <button class="btn btn-color-2">
+                    Download CV
+                </button>
+            </a>
+            <button class="btn btn-color-1" th:onclick="@{location.href='./#contact'}">
+                Contact Info
+            </button>
+        </div>
+        <div id="socials-container">
+            <a th:each="media : ${social}" th:href="@{${media.onClickAction}}" th:target="_blank">
+                <img
+                        th:src="@{${media.assetUrl}}"
+                        th:alt="${media.altName}"
+                        class="icon"
+                />
+            </a>
+        </div>
+    </div>
+</section>
+<!-- END OF PROFILE SECTION -->
+
+<!-- *************************************************************************** -->
+
+<!-- ABOUT ME -->
+
+<section id="about">
+    <p class="section__text__p1">Get To Know More</p>
+    <h1 class="title">About Me</h1>
+    
+           <div class="abt-container">
+           <div class="education">
+                   <div class="subeducation">
+		                 <h1>EDUCATION</h1>
+				         <div class="abt-container-data"  th:each="e : ${education}">
+						                     <div class="board">
+						                            <h3 th:text="${e.board}"></h3>
+						                            <h3 th:text="${e.name}"></h3>
+						                            <h5 th:text="${e.year}"></h5>
+						                            <h5 th:text="${e.per}"></h5>
+						                     </div>                            		
+						    </div>     
+				   </div>     
+		</div>
+		
+			  <p class="line">---------------------</p>
+		               <div class="bcontainer">
+			                  <div class="bullets"  th:each="n:${#numbers.sequence(1,5)}"><ul><li></li></ul></div>
+			         </div>
+		
+			    <div class="experience">
+			        <div class="subexperience">
+                    <h1>EXPERIENCE</h1>
+		         <div class="abt-container-data"  th:each="e : ${experience}">
+				                     <div class="board">
+				                            <h3 th:text="${e.role}"></h3>
+				                            <h3 th:text="${e.organization}"></h3>
+		        				            <h5>Internship</h5>
+				                            <h5 th:text="${e.date}"></h5>
+				                     </div>                     		
+				               </div>          
+			       </div>
+			       </div>	
+             </div>
+           
+             <img
+		            th:src="@{${arrow.assetUrl}}"
+		            th:alt="${arrow.altName}"
+		            class="icon arrow"
+		            th:onclick="@{location.href='./#'}"
+		    />
+
+</section>
+<!-- END OF ABOUT ME -->
+
+<!-- *************************************************************************** -->
+
+<!-- EXPERIENCE -->
+
+<section id="experience">
+    <p class="section__text__p1">Explore My</p>
+    <h1 class="title">Skills</h1>
+    <div class="experience-details-container">
+        <div class="about-containers">
+        
+	            <div class="details-container">
+	                <h2 class="experience-sub-title">Frontend Development</h2>
+	                
+	                <div class="article-container">
+	                  
+	                    <article th:each="exp : ${frontend}">
+	                        <img
+	                                th:src="@{${exp.asseturl}}"
+	                                alt="Experience icon"
+	                                class="icon"
+	                        />
+	                        <div>	
+	                            <h3 th:text="${exp.technology}">Technology</h3>
+	                            <p th:text="${exp.expLevel}">Experience</p>
+	                        </div>
+	                    </article>
+	                  
+	                </div>
+	            </div>
+	            
+	            <div class="details-container">
+	                <h2 class="experience-sub-title">Backend Development</h2>
+	                <div class="article-container">
+	                    <article th:each="exp : ${backend}">
+	                        <img
+	                                th:src="@{${exp.asseturl}}"
+	                                alt="Experience icon"
+	                                class="icon"
+	                        />
+	                        <div>
+	                            <h3 th:text="${exp.technology}">Technology</h3>
+	                            <p th:text="${exp.expLevel}">Experience</p>
+	                        </div>
+	                    </article>
+	                </div>
+	            </div>
+      
+            <div class="details-container">
+                <h2 class="experience-sub-title">Cloud Technology</h2>
+                <div class="article-container">
+                    <article th:each="exp : ${cloud}">
+                        <img
+                                th:src="@{${exp.asseturl}}"
+                                alt="Experience icon"
+                                class="icon"
+                        />
+                        <div>
+                            <h3 th:text="${exp.technology}">Technology</h3>
+                            <p th:text="${exp.expLevel}">Experience</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            
+                <div class="details-container">
+                <h2 class="experience-sub-title">Databases</h2>
+                <div class="article-container">
+                    <article th:each="exp : ${database}">
+                        <img
+                                th:src="@{${exp.asseturl}}"
+                                alt="Experience icon"
+                                class="icon"
+                        />
+                        <div>
+                            <h3 th:text="${exp.technology}">Technology</h3>
+                            <p th:text="${exp.expLevel}">Experience</p>
+                        </div>
+                    </article>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+    <img
+            th:src="@{${arrow.assetUrl}}"
+            th:alt="${arrow.altName}"
+            class="icon arrow"
+            th:onclick="@{location.href='./#'}"
+    />
+</section>
+
+<!-- END OF EXPERIENCE  -->
+
+<!-- *************************************************************************** -->
+
+<!-- PROJECT -->
+
+<section id="projects">
+    <p class="section__text__p1">Browse My Recent</p>
+    <h1 class="title">Projects</h1>
+    <div class="experience-details-container">
+        <div class="about-containers">
+        
+     
+	            <div class="details-container " th:each="project : ${projects}">          
+	                    <img
+	                            th:src="@{${project.assetUrl}}"
+	                            th:alt="${project.altName}"
+	                            class="project-img"
+	                    />
+	               
+	                  <div class="projecttitle">
+	                        <h2 class="experience-sub-title project-title" th:text="${project.projectName}">ProjectName</h2>
+	                   </div>
+	                   
+	                  <div class="btn-container">
+	                    <a th:href="${project.onGithubClickAction}" th:target="_blank">
+	                        <button class="btn btn-color-2 project-btn">
+	                            Github
+	                        </button>
+	                    </a>
+	                </div>
+	         </div> 
+	         
+        </div>
+    </div>
+    <img
+            th:src="@{${arrow.assetUrl}}"
+            th:alt="${arrow.altName}"
+            class="icon arrow"
+            th:onclick="@{location.href='./#'}"
+    />
+</section>
+
+<!-- END OF PROJECT -->
+
+<!-- *************************************************************************** -->
+
+<!-- CONTACT -->
+<section id="contact">
+    <p class="section__text__p1">Get in Touch</p>
+    <h1 class="title">Contact Me</h1>
+    <div class="contact-info-upper-container">
+        <div class="contact-info-container">
+            <img
+                    th:src="@{${email}}"
+                    alt="Email icon"
+                    class="icon contact-icon email-icon"
+            />
+            <p><a th:href="@{${mailtoemail}}" th:target="_blank" th:text="${myEmail}">email</a></p>
+        </div>
+        <div class="contact-info-container">
+            <img
+                    th:src="@{/assets/linkedin.png}"
+                    alt="LinkedIn icon"
+                    class="icon contact-icon"
+            />
+            <p><a th:href="@{${linkedin}}" th:target="_blank">LinkedIn</a></p>
+        </div>
+    </div>	
+    <div>
+       <img
+            th:src="@{${arrow.assetUrl}}"
+            th:alt="${arrow.altName}"
+            class="icon arrow"
+            th:onclick="@{location.href='./#'}"
+    />
+    </div>
+</section>
+
+<!-- *************************************************************************** -->
+
+<!-- FOOTER SECTION -->
+<footer>
+    <nav>
+        <div class="nav-links-container">
+            <ul class="nav-links">
+                <li><a th:href="@{./#about}">About</a></li>
+               
+                <li><a th:href="@{./#experience}">Experience</a></li>
+                <li><a th:href="@{./#projects}">Projects</a></li>
+               
+            </ul>
+        </div>
+           <p>Made with ❤️ using Thymeleaf.</p>
+    </nav>
+ 
+</footer>
+<script type="text/javascript" th:src="@{/js/script.js}"></script>
+</body>
+</html>
