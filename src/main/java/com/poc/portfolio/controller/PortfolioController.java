@@ -212,9 +212,8 @@ private List<Experience> getexperience() {
 	  List<Education> e=new ArrayList<>();
 	  e.add(Education.builder().board("SSC").name("St. Patrick's High School").year("2017-18").per("89.47%").build());
 	  e.add(Education.builder().board("HSC").name("Annasaheb Magar College").year("2019-20").per("75.85%").build());
-	  e.add(Education.builder().board("BE in Computer Engineering").name("Sinhgad Academy of Engineering").year("2021-24").per("9.16 CGPA").build());
+	  e.add(Education.builder().board("BE in Computer Engineering").name("Sinhgad Academy of Engineering").year("2020-24").per("9.16 CGPA").build());
 	  return e;
 }
-
  
 }
